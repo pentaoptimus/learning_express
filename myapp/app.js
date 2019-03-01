@@ -6,6 +6,21 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var notesRouter = require('./routes/notes');
+
+// Using ES6 imports to create the connection
+const dbConfig = require('./configs/database.config.js');
+const mongoose = require('mongoose');
+
+// Connecting to the database
+mongoose.connect(dbConfig.url, {
+  useNewUrlParser: true
+}).then(() => {
+  console.log("Successfully connected to the database !");
+}).catch(err => {
+  console.log('Could not connect to the database ! Exiting now...', err);
+  process.exit();
+});
 
 var app = express();
 
@@ -21,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/notes', notesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,9 +53,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-// Using ES6 imports to create the connection
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/admin',{ useNewUrlParser: true });
 
 module.exports = app;
