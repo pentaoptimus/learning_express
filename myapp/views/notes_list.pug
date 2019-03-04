@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  div.container-fluid
+    div.row.mt-3
+      div.col-sm-11.h-25
+        h5= title
+      div.col-sm-1.text-right.h-25
+        a(class='btn btn-primary btn-sm' href='/notes/create') New
+  table.table.mt-3
+    thead.thead-inverse
+      tr
+        th #
+        th Title
+        th Content
+    tbody
+      each note in notes
+        tr
+          td
+          td(scope='row')= note.title
+          td= note.content

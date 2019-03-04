@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  div.container
+    div.row.col-sm-6.mt-3.mx-auto
+      div.col-sm-8.h-25.p-0.float-left
+        h5= title
+      div.col-sm-4.text-right.h-25.p-0.float-left
+        a(class='btn btn-primary btn-sm' href='/notes') Back To List
+    divr.row.col-sm-6.mt-3.mx-auto
+      form.col-sm-12
+        div.form-group
+          label(for='title') Title
+          input(
+            type='text',
+            class='form-control form-control-sm',
+            id='title',
+            name='title',
+            placeholder="Enter title here"
+          )
+        div.form-group
+          label(for='content') Content
+          input(
+            type='text',
+            class='form-control form-control-sm',
+            id='content',
+            name='content',
+            placeholder="Enter content here"
+          )
+        div.form-group.text-right
+          a(class='btn btn-primary btn-sm' href='/notes') Submit
