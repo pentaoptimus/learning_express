@@ -8,7 +8,7 @@ block content
       div.col-sm-4.text-right.h-25.p-0.float-left
         a(class='btn btn-primary btn-sm' href='/notes') Back To List
     div.row.col-sm-6.mt-3.mx-auto
-      form.col-sm-12
+      form.col-sm-12(action='/notes/create' method='POST')
         div.form-group
           label(for='title') Title
           input(
@@ -16,8 +16,11 @@ block content
             class='form-control form-control-sm',
             id='title',
             name='title',
+            value=formData.title,
             placeholder="Enter title here"
           )
+          if (errors && errors.title)
+            p.small.text-danger= errors.title
         div.form-group
           label(for='content') Content
           input(
@@ -25,7 +28,10 @@ block content
             class='form-control form-control-sm',
             id='content',
             name='content',
+            value=formData.content,
             placeholder="Enter content here"
           )
+          if (errors && errors.content)
+            p.small.text-danger= errors.content
         div.form-group.text-right
-          a(class='btn btn-primary btn-sm' href='/notes') Submit
+          button(class='btn btn-primary btn-sm' type='submit' href='/notes') Submit
