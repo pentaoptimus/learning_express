@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Note = require('../models/note.models.js');
-const validateNote = require('../validators/notes.js');
+const { validateNote } = require('../validators/notes.js');
+const { isEmpty } = require('lodash');
 
 /* GET notes listing. */
 router.get('/', function(req, res, next) {
