@@ -21,6 +21,6 @@ block content
           td(scope='row')= note.title
           td= note.content
           td.text-right
-            a(class='btn btn-success btn-sm' href='/notes/edit') Edit
+            a(class='btn btn-success btn-sm' href='/notes/edit/'+note._id) Edit
           td
             a(class='btn btn-info btn-sm' href='/notes/detail') Detail

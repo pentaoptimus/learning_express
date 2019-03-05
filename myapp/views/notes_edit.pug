@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  div.container
+    div.row.col-sm-6.mt-3.mx-auto
+      div.col-sm-8.h-25.p-0.float-left
+        h5= title
+      div.col-sm-4.text-right.h-25.p-0.float-left
+        a(class='btn btn-primary btn-sm' href='/notes') Back To List
+    div.row.col-sm-6.mt-3.mx-auto
+      form.col-sm-12(action='/notes/edit' method='POST')
+        imput(
+          type  = 'hidden',
+          id    = '_id',
+          name  = '_id',
+          value = _id
+        )
+        div.form-group
+          label(for='title') Title
+          input(
+            type        = 'text',
+            class       = 'form-control form-control-sm',
+            id          = 'title',
+            name        = 'title',
+            value       = formData.title,
+            placeholder = "Enter title here"
+          )
+          if (errors)
+            each error in errors
+              if(error.param=='title')
+                 p.small.text-danger= error.msg
+        div.form-group
+          label(for='content') Content
+          input(
+            type        = 'text',
+            class       = 'form-control form-control-sm',
+            id          = 'content',
+            name        = 'content',
+            value       = formData.content,
+            placeholder = "Enter content here"
+          )
+          if (errors)
+            each error in errors
+              if(error.param=='content')
+                 p.small.text-danger= error.msg
+        div.form-group.text-right
+          button(class='btn btn-primary btn-sm' type='submit' href='/notes') Submit
