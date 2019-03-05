@@ -10,12 +10,17 @@ block content
   table.table.mt-3
     thead.thead-inverse
       tr
-        th #
+        th Id
         th Title
         th Content
+        th(colspan='2')
     tbody
       each note in notes
         tr
-          td
+          td= note._id
           td(scope='row')= note.title
           td= note.content
+          td.text-right
+            a(class='btn btn-success btn-sm' href='/notes/edit') Edit
+          td
+            a(class='btn btn-info btn-sm' href='/notes/detail') Detail

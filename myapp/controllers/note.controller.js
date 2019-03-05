@@ -48,3 +48,26 @@ exports.create_complete = function (req, res, next) {
         return res.redirect('/notes');
     });
 };
+
+/* Get Edit a note. */
+exports.edit = function (req, res, next) {
+    return res.render('notes_edit', { title: 'Edit note.', errors: {}, formData: req.body });
+};
+
+/* PUT a note. */
+exports.edit_complete = function (req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.render('notes_edit', { title: 'Edit note.', errors: errors.array(), formData: req.body });
+    }
+    //save note
+    const { id, title, content } = req.body;
+    var condition = { _id: id };
+    var updateData = { title: title, content: content };
+    Note
+        .where(condition)
+        .update({ $set: updateData })
+        .then(() => {
+            return res.redirect('/notes');
+        });
+};
