@@ -19,8 +19,10 @@ block content
             value=formData.title,
             placeholder="Enter title here"
           )
-          if (errors && errors.title)
-            p.small.text-danger= errors.title
+          if (errors)
+            each error in errors
+              if(error.param=='title')
+                 p.small.text-danger= error.msg
         div.form-group
           label(for='content') Content
           input(
@@ -31,7 +33,9 @@ block content
             value=formData.content,
             placeholder="Enter content here"
           )
-          if (errors && errors.content)
-            p.small.text-danger= errors.content
+          if (errors)
+            each error in errors
+              if(error.param=='content')
+                 p.small.text-danger= error.msg
         div.form-group.text-right
           button(class='btn btn-primary btn-sm' type='submit' href='/notes') Submit
