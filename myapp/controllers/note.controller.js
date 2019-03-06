@@ -37,7 +37,7 @@ exports.validate = (method) => {
 exports.notes = function (req, res, next) {
     Note.find().exec(function (err, notes) {
         if (err) return handleError(err);
-        res.render('notes_list', { title: 'List notes.', notes: notes });
+        res.render('notes_list', { title: 'List notes.', notes: notes, errors: {} });
     });
 };
 
@@ -69,7 +69,7 @@ exports.edit = function (req, res, next) {
         .find({ _id: _id })
         .exec(function (err, note) {
             if (err) return handleError(err);
-            return res.render('notes_edit', { title: 'Edit note.', errors: {}, formData: note, _id: _id});
+            return res.render('notes_edit', { title: 'Edit note.', errors: {}, formData: note[0], _id: _id});
         });
 };
 
@@ -77,7 +77,7 @@ exports.edit = function (req, res, next) {
 exports.edit_complete = function (req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.render('notes_edit', { title: 'Edit note.', errors: errors.array(), formData: req.body });
+        return res.render('notes_edit', { title: 'Edit note.', errors: errors.array(), formData: req.body, _id: req.body._id });
     }
     //save note
     const { title, content } = req.body;
@@ -89,4 +89,20 @@ exports.edit_complete = function (req, res, next) {
         .then(() => {
             return res.redirect('/notes');
         });
+};
+
+/* DELETE a note. */
+exports.delete = function (req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        Note.find().exec(function (err, notes) {
+            if (err) return handleError(err);
+            res.render('notes_list', { title: 'List notes.', notes: notes, errors: errors.array() });
+        });
+    }
+    Note.deleteOne({ _id: req.params._id }, function (err) {
+        if (err) return handleError(err);
+        // deleted at most one tank document
+        return res.redirect('/notes');
+    });
 };

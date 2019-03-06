@@ -8,7 +8,7 @@ block content
       div.col-sm-4.text-right.h-25.p-0.float-left
         a(class='btn btn-primary btn-sm' href='/notes') Back To List
     div.row.col-sm-6.mt-3.mx-auto
-      form.col-sm-12(action='/notes/edit' method='POST')
+      form.col-sm-12(action='/notes/edit/'+_id method='POST')
         imput(
           type  = 'hidden',
           id    = '_id',

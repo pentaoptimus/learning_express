@@ -13,7 +13,7 @@ block content
         th Id
         th Title
         th Content
-        th(colspan='2')
+        th
     tbody
       each note in notes
         tr
@@ -22,5 +22,5 @@ block content
           td= note.content
           td.text-right
             a(class='btn btn-success btn-sm' href='/notes/edit/'+note._id) Edit
-          td
             a(class='btn btn-info btn-sm' href='/notes/detail') Detail
+            a(class='btn btn-danger btn-sm' href='/notes/delete/'+note._id) Delete
