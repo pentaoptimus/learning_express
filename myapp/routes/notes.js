@@ -29,4 +29,7 @@ router.post('/edit/:_id', noteController.validate('edit_complete'), noteControll
   Use express validator as middleware to validate.
 */
 router.get('/delete/:_id', noteController.delete);
+
+/* Get detail of a note. */
+router.get('/detail/:_id', noteController.detail);
 module.exports = router;

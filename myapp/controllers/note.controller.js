@@ -106,3 +106,14 @@ exports.delete = function (req, res, next) {
         return res.redirect('/notes');
     });
 };
+
+/* Get detail of a note. */
+exports.detail = function (req, res, next) {
+    var _id = req.params._id;
+    Note
+        .find({ _id: _id })
+        .exec(function (err, note) {
+            if (err) return handleError(err);
+            return res.render('notes_detail', { title: 'Detail note.', errors: err, formData: note[0] });
+        });
+};

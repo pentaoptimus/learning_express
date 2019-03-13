@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  div.container
+    div.row.col-sm-6.mt-3.mx-auto
+      div.col-sm-8.h-25.p-0.float-left
+        h5= title
+      div.col-sm-4.text-right.h-25.p-0.float-left
+        a(class='btn btn-primary btn-sm' href='/notes') Back To List
+    div.row.col-sm-6.mt-3.mx-auto
+      div.form-group.col-sm-12
+        label(for='title') Title
+        p(
+          class='.small',
+        )= formData.title
+        if (errors)
+          each error in errors
+            if(error.param=='title')
+                p.small.text-danger= error.msg
+      div.form-group.col-sm-12
+        label(for='content') Content
+        p(
+          class='.small',
+        )= formData.content
+        if (errors)
+          each error in errors
+            if(error.param=='content')
+                p.small.text-danger= error.msg
